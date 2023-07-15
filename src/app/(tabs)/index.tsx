@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { currencyFormatter } from "@/src/utils/currency";
+import { useEffect, useState } from "react";
+import { currencyFormatter } from "@/utils/currency";
 import { FontAwesome } from "@expo/vector-icons";
 import {
   Box,
@@ -9,25 +9,20 @@ import {
   Container,
   Flex,
   FlatList,
-  Divider,
   Icon,
   theme,
 } from "native-base";
+import { useTransactionsStore } from "@/store/transactions";
+import EmptyList from "@/components/EmptyList";
 
-const array = [
-  { description: "Almoço", value: 100 },
-  { description: "Delivery", value: -20 },
-  { description: "Delivery", value: -30 },
-  { description: "Janta", value: 50 },
-];
-
-export default function TabOneScreen() {
+export default function Home() {
   const [value, setValue] = useState(0);
+  const { transactions } = useTransactionsStore();
 
   const handleProgress = () => {
     const initialValue = 0;
-    const result = array.reduce(
-      (accumulator, item) => accumulator + item.value,
+    const result = transactions.reduce(
+      (accumulator, item) => accumulator + Number(item.amount),
       initialValue
     );
 
@@ -36,7 +31,7 @@ export default function TabOneScreen() {
 
   useEffect(() => {
     handleProgress();
-  }, []);
+  }, [transactions]);
 
   return (
     <Flex flex={1} bg="white">
@@ -59,8 +54,9 @@ export default function TabOneScreen() {
       </Box>
       <FlatList
         contentContainerStyle={{ padding: 16, flexGrow: 1 }}
-        data={array}
-        keyExtractor={(item) => item.value.toString()}
+        data={transactions}
+        keyExtractor={(item) => item.amount.toString()}
+        ListEmptyComponent={EmptyList}
         renderItem={({ item }) => (
           <Flex
             w="100%"
@@ -74,9 +70,9 @@ export default function TabOneScreen() {
           >
             <Icon
               as={FontAwesome}
-              name={item.value > 0 ? "arrow-up" : "arrow-down"}
+              name={item.amount > 0 ? "arrow-up" : "arrow-down"}
               color={
-                item.value > 0
+                item.amount > 0
                   ? theme.colors.success[500]
                   : theme.colors.error[500]
               }
@@ -84,7 +80,7 @@ export default function TabOneScreen() {
             />
             <Box>
               <Heading size="md" my={1}>
-                {currencyFormatter(item.value)}
+                {currencyFormatter(item.amount)}
               </Heading>
               <Text fontWeight="500">{item.description}</Text>
             </Box>

@@ -2,7 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
 import { useColorScheme } from "react-native";
 
-import colors from "@/src/constants/colors";
+import colors from "@/constants/colors";
 import { theme } from "native-base";
 
 /**
@@ -39,7 +39,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="add-transaction"
         options={{
           title: "Adicionar",
           tabBarIcon: ({ color }) => (
@@ -48,7 +48,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="three"
+        name="settings"
         options={{
           title: "Configurações",
           tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,

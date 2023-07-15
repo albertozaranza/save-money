@@ -4,9 +4,11 @@
     "strict": true,
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
-    }
+    },
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "include": [
     "**/*.ts",

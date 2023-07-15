@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function TabTwoScreen() {
+export default function Settings() {
   return (
     <View>
-      <Text>Tab Two</Text>
+      <Text>Settings</Text>
     </View>
   );
 }
