@@ -25,7 +25,6 @@ export default function AddTransaction() {
     handleSubmit,
     reset,
     formState: { errors },
-    register,
   } = useForm<FormData>({
     defaultValues: {
       description: "",
