@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 type Transaction = {
   description: string;
-  amount: number;
+  amount: string;
 };
 
 type TransactionState = {

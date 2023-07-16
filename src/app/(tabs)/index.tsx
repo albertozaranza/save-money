@@ -41,7 +41,7 @@ export default function Home() {
         </Container>
         <Flex flexDirection="row" justifyContent="space-between" mt="3">
           <Text fontSize="lg" color="green.500">
-            {currencyFormatter(value)}
+            {currencyFormatter(value > 0 ? value : 0)}
           </Text>
           <Text fontSize="lg">de R$ 600,00</Text>
         </Flex>
@@ -70,9 +70,9 @@ export default function Home() {
           >
             <Icon
               as={FontAwesome}
-              name={item.amount > 0 ? "arrow-up" : "arrow-down"}
+              name={Number(item.amount) > 0 ? "arrow-up" : "arrow-down"}
               color={
-                item.amount > 0
+                Number(item.amount) > 0
                   ? theme.colors.success[500]
                   : theme.colors.error[500]
               }
@@ -80,7 +80,7 @@ export default function Home() {
             />
             <Box>
               <Heading size="md" my={1}>
-                {currencyFormatter(item.amount)}
+                {currencyFormatter(Number(item.amount))}
               </Heading>
               <Text fontWeight="500">{item.description}</Text>
             </Box>

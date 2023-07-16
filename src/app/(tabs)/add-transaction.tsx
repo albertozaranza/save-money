@@ -11,19 +11,21 @@ import {
 } from "native-base";
 
 import { useTransactionsStore } from "@/store/transactions";
+
 import { FontAwesome } from "@expo/vector-icons";
 
 type FormData = {
   description: string;
-  amount: number;
+  amount: string;
 };
 
 export default function AddTransaction() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
     reset,
+    formState: { errors },
+    register,
   } = useForm<FormData>({
     defaultValues: {
       description: "",
@@ -96,8 +98,8 @@ export default function AddTransaction() {
               <Stack mx="4">
                 <FormControl.Label>Valor</FormControl.Label>
                 <Input
-                  value={value?.toString()}
-                  onChangeText={(value) => onChange(Number(value))}
+                  value={value}
+                  onChangeText={onChange}
                   isInvalid={errors.amount?.type === "required"}
                   type="text"
                   keyboardType="numeric"
